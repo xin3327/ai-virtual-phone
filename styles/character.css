@@ -1575,3 +1575,10 @@
 
 /* 关系标签在编辑模式下可点（剪断关系） */
 .wt-line-label-editable { cursor: pointer; }
+
+/* Keep the TARGET ARCHIVES action bar clear of the Netlify corner badge on phones. */
+@media (max-width: 480px) {
+  .char-bottom-bar .wt-bottom-pill {
+    transform: translate(-42px, -12px);
+  }
+}
