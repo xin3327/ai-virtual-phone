@@ -44,3 +44,7 @@
   --font-size-lg: 17px;  --font-size-xl: 20px;
   --font-size-2xl: 24px; --font-size-3xl: 30px;
 }
+
+body {
+  padding-bottom: 80px !important;
+}
