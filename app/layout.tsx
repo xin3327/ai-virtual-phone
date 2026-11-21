@@ -47,19 +47,6 @@ export default function RootLayout({
         <ChatReasoningVisibilityController />
         {children}
       </body>
-    <style>{`
-  iframe[title="Netlify Badge"], 
-  iframe[src*="netlify-badge"], 
-  #netlify-badge, 
-  [class*="netlify"] { 
-    opacity: 0 !important; 
-    pointer-events: none !important; 
-  }
-  body { 
-    padding-bottom: 80px !important; 
-  }
-`}</style>
-  
-    </html>
+</html>
   );
 }
