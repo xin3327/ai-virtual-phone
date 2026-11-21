@@ -47,6 +47,11 @@ export default function RootLayout({
         <ChatReasoningVisibilityController />
         {children}
       </body>
+    <style>{`
+       #netlify-badge { display: none !important; }
+       [class*="netlify"] { display: none !important; }
+`}</style>
+  
     </html>
   );
 }
