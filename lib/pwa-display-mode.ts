@@ -49,13 +49,13 @@ export function writePwaDisplayPreference(preference: PwaDisplayPreference) {
   window.dispatchEvent(new CustomEvent(PWA_DISPLAY_MODE_CHANGED_EVENT, { detail: preference }));
 }
 
-/** Preserve the upstream default: mobile browsers request fullscreen unless Edge or explicitly disabled. */
+/** Only enter immersive fullscreen when the user explicitly selected it.
+ *  Automatic fullscreen on the first page tap can hide Android browser/system UI
+ *  and leave an unpainted black top inset on some devices. */
 export function shouldRequestPwaFullscreen(): boolean {
   if (typeof document === "undefined" || typeof navigator === "undefined") return false;
   const preference = readPwaDisplayPreference(document.cookie);
-  if (preference === "standalone") return false;
-  if (preference === "fullscreen") return true;
-  return !/Edg/i.test(navigator.userAgent);
+  return preference === "fullscreen";
 }
 
 export function getRuntimePwaDisplayMode(): RuntimePwaDisplayMode {
@@ -75,7 +75,7 @@ export function getRuntimePwaDisplayMode(): RuntimePwaDisplayMode {
 }
 
 /** 非沉浸布局是否生效：必须用户显式开了「显示系统状态栏」且运行时确实不在全屏。
- *  只看运行时模式是不行的——iOS 装到桌面永远报 standalone，会把没碰过开关的
+ *  只看运行时模式是不行的——iOS 装到桌面的 PWA 永远报 standalone，会把没碰过开关的
  *  用户也误判成非沉浸（这正是 pwa-manifest-injector 挂标记前要先过这道门的原因）。 */
 export function isNonImmersiveLayoutActive(): boolean {
   if (typeof document === "undefined") return false;
